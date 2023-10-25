@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "624462514484",
+    "project_id": "dependencies-notifier",
+    "storage_bucket": "dependencies-notifier.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624462514484:android:a7c0a9f6213ece6f787d61",
+        "android_client_info": {
+          "package_name": "com.piriurna.gradleversionnotifier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624462514484-5f5ulo10dkrrc9tdskc4m6gbs1apenov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBagJVcUUviBqS7VkL2DZLeA3eCO1oI7pw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624462514484-5f5ulo10dkrrc9tdskc4m6gbs1apenov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
