@@ -76,13 +76,15 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.1')
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:32.4.0') // Please check for the latest version
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
-    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.1')
+    implementation 'com.google.firebase:firebase-messaging:23.3.1'
+
 
     // Room
     implementation "androidx.room:room-runtime:2.6.0"
@@ -100,10 +102,18 @@ dependencies {
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.3"
+    implementation "com.squareup.okhttp3:okhttp:4.11.0"
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
 
     // Gson
     implementation 'com.google.code.gson:gson:2.10'
+
+    // OkHttp
+    implementation "com.squareup.okhttp3:logging-interceptor:4.11.0"
+
+    // Lottie
+    implementation "com.airbnb.android:lottie-compose:6.1.0"
 }
 
 kapt {

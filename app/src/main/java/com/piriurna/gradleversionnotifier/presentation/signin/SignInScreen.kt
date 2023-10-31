@@ -22,13 +22,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.piriurna.gradleversionnotifier.R
+import com.piriurna.gradleversionnotifier.ui.components.loading.LoadingScreen
 import com.piriurna.gradleversionnotifier.ui.components.signin.rememberFirebaseAuthLauncher
 
 @Composable
 fun SignInScreen(
     viewModel: SignInViewModel,
 ) {
-    val uiState = viewModel.uiState
+    val uiState = viewModel.uiState.value
 
     val context = LocalContext.current
 
@@ -42,15 +43,39 @@ fun SignInScreen(
     )
     val token = stringResource(R.string.default_web_client_id)
 
-    SignInScreenContent(
-        uiState = uiState,
-        onSignInClicked = viewModel::onSignInClicked,
-        onEmailChanged = viewModel::onEmailChanged,
-        onPasswordChanged = viewModel::onPasswordChanged,
-        onGoogleLoginPressed = {
-            viewModel.onGoogleLoginPressed(context, token, launcher)
-        },
-    )
+    when {
+        uiState.isLoading -> {
+            LoadingScreen()
+        }
+        uiState.error -> {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = "Error", style = MaterialTheme.typography.headlineMedium)
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(onClick = {
+                    viewModel.onGoogleLoginPressed(context, token, launcher)
+                }) {
+                    Text(text = "Try again")
+                }
+            }
+        }
+        else -> {
+            SignInScreenContent(
+                uiState = uiState,
+                onSignInClicked = viewModel::onSignInClicked,
+                onEmailChanged = viewModel::onEmailChanged,
+                onPasswordChanged = viewModel::onPasswordChanged,
+                onGoogleLoginPressed = {
+                    viewModel.onGoogleLoginPressed(context, token, launcher)
+                },
+            )
+        }
+    }
 }
 
 @Composable
@@ -75,7 +100,8 @@ fun SignInScreenContent(
         )
         Spacer(modifier = Modifier.height(32.dp))
         GoogleLoginButton(
-            onClick = onGoogleLoginPressed
+            onClick = onGoogleLoginPressed,
+            isLoading = uiState.isLoading
         )
     }
 }
@@ -130,7 +156,8 @@ fun EmailPasswordLoginCard(
 
 @Composable
 fun GoogleLoginButton(
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    isLoading: Boolean
 ) {
     Box(
         modifier = Modifier
@@ -144,7 +171,7 @@ fun GoogleLoginButton(
             onClick = onClick
         ) {
             Text(
-                text = "Sign-in with Google"
+                text = if (isLoading) "Loading" else "Sign-in with Google"
             )
         }
     }

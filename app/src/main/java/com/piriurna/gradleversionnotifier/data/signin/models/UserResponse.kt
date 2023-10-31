@@ -11,5 +11,5 @@ data class UserResponse(
     @SerializedName("fcmToken")
     val fcmToken: String,
     @SerializedName("projects")
-    val projects: List<ProjectResponse>
+    val projects: List<ProjectResponse>? = emptyList()
 ): Parcelable

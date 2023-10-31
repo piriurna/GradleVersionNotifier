@@ -8,12 +8,12 @@ import kotlinx.parcelize.Parcelize
 data class DependencyResponse(
     @SerializedName("id")
     val id: String,
-    @SerializedName("name")
+    @SerializedName("group")
     val group: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("latestVersion")
     val latestVersion: String,
     @SerializedName("usersInterested")
-    val usersInterested: List<UserResponse>
+    val usersInterested: List<UserResponse> = emptyList()
 ): Parcelable

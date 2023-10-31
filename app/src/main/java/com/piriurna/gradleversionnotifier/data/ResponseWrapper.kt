@@ -13,3 +13,11 @@ sealed class ResponseWrapper<out T> {
     }
 }
 
+fun <T, U> ResponseWrapper<T>.asResult(
+    operator: (T) -> U
+): Result<U> {
+    return when (this) {
+        is ResponseWrapper.Success -> Result.success(operator(data))
+        is ResponseWrapper.Error -> Result.failure(exception)
+    }
+}
